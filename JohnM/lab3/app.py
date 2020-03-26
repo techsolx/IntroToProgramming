@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+lab3 magic 8ball
+simulate magic 8ball game
+print results for fun and profit.
+"""
 
 import random
 import time
@@ -32,15 +37,16 @@ def ask_question():
     if question == "quit()":
         quit()
     elif "?" in question:
-        answer = responses[rand_numb]
+        answer = random.choice(responses)
         time.sleep(random.randint(1, 3))
         print(f"\n{answer}\n")
     else:
-        print(f"{question} doesn't look like a question, "
-              f"it looks like a statement? \n")
+        print(
+            f"'{question}' <-- doesn't look like a question, "
+            f"it looks like a statement? \n"
+        )
         ask_question()
 
 
 while True:
-    rand_numb = random.randint(0, len(responses)-1)
     ask_question()
