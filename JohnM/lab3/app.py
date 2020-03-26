@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+lab3 magic 8ball
+simulate magic 8ball game
+print results for fun and profit.
+"""
 
 import random
 import time
