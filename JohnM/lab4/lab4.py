@@ -22,7 +22,7 @@ def get_num_grade():
         get_num_grade()
 
 
-def convert_to_letter(value=""):
+def convert_to_letter(value=100):
     if value >= 90:
         return "A"
     elif value >= 80:
