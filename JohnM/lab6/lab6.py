@@ -22,7 +22,7 @@ choices = ["rock", "paper", "scissors"]
 
 
 def check_winner(u, c):
-    if u == "rock" and c == "paper":
+    if u == "rock" and c == "scissors":
         return True
     elif u == "paper" and c == "rock":
         return True
@@ -34,29 +34,29 @@ def check_winner(u, c):
 
 def main():
     while True:
-        computer_player = random.choice(choices)
         question = input("Would you like to play Rouchambaeu, y/n [y]? ")
         if question == "n":
             quit()
         else:
-            human_player = input("Type in rock, paper or scissors ")
+            human_player = input("\nType in rock, paper or scissors ")
+            computer_player = random.choice(choices)
 
         if human_player == computer_player:
             print(
-                f"Tie you picked {human_player},"
-                f"the computer picked {computer_player}!"
+                f"\nTie you picked {human_player},"
+                f"the computer picked {computer_player}!\n"
             )
         else:
             result = check_winner(human_player, computer_player)
             if result:
                 print(
-                    f"You win, you picked {human_player},"
-                    f"the computer picked {computer_player}"
+                    f"\nYou win, you picked {human_player},"
+                    f"the computer picked {computer_player}\n"
                 )
             else:
                 print(
-                    f"You lost, you picked {human_player},"
-                    f"the computer picked {computer_player}"
+                    f"\nYou lost, you picked {human_player},"
+                    f"the computer picked {computer_player}\n"
                 )
 
 
