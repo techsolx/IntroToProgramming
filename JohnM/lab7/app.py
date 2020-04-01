@@ -24,27 +24,60 @@ and the computer will guess until they get it right.
 
 import random
 
+user_guesses = []
 
-def get_numbers():
-    c_int = random.randint(1, 10)
-    u_int = int(input("Enter an integer between 1 and 10"))
+
+def get_user_input():
+    """
+    get the users input,
+    return the result.
+    """
+    u_int = int(input("Enter an integer between 1 and 10: "))
+    user_guesses.append(u_int)
     if u_int in range(1, 11):
-        return c_int, u_int
+        return u_int
     else:
         print(f"That number is not in the range of numbers I am looking for,"
               f"please try again.")
-        get_numbers()
+        get_user_input()
+
+
+def check_em(first_int, second_int):
+    """
+    check 2 integers, if they are the same
+    return a match, if they are different,
+    return higher or lower.
+    """
+    if first_int == second_int:
+        return True
+    elif first_int > second_int:
+        print(f"Too low")
+    else:
+        print(f"Too high")
 
 
 def main():
-    while True:
-        question = input(f"Would you like to guess a number between"
-                         f"1 and 10, y/n [y] ")
-        if question == "n":
-            quit()
+    guesses = 0
+    print(f"Initial setting of guesses is {guesses}")
+    question = input(
+        f"Would you like to guess a number between "
+        f"1 and 10, y/n [y] "
+    )
+    if question == "n":
+        quit()
+    else:
+        c_int = random.randint(1, 10)
+    while guesses <= 10:
+        guesses += 1
+        print(f"Current setting of guesses is {guesses}")
+        u_int = get_user_input()
+        if check_em(c_int, u_int):
+            print(f"You got it, it took you {guesses} tries!\n")
+            main()
         else:
-            pass
+            u_int = get_user_input()
+            check_em(c_int, u_int)
 
 
 if __name__ == "__main__":
-    main()
+        main()
