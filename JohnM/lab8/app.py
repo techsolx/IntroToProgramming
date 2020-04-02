@@ -48,8 +48,8 @@ def main():
     the_letters(args["number"])
     the_numbers(args["digits"])
     the_punctuation(args["punctuation"])
-    pw = ''.join(l) + ''.join(ddn + p
-    print(f"Password is {random.shuffle(pw)}")
+    pw = ''.join(the_letters) + ''.join(the_numbers) + ''.join(the_punctuation)
+    print(f"Password is {pw}")
 
 
 if __name__ == "__main__":
