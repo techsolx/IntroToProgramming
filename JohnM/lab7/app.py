@@ -2,7 +2,7 @@
 
 """
 Lab 7: Guess the Number, the computer will choose
-a `random int` between 1 and 10.
+a `random int between 1 and 10.
 The user will then try to guess the number,
 and the program will tell them whether they're right or wrong.
 
@@ -22,8 +22,10 @@ the user will pick a number,
 and the computer will guess until they get it right.
 """
 
+import argparse
 import random
 
+global guesses
 user_guesses = []
 
 
@@ -32,13 +34,21 @@ def get_user_input():
     get the users input,
     return the result.
     """
+    global guesses
     u_int = int(input("Enter an integer between 1 and 10: "))
-    user_guesses.append(u_int)
     if u_int in range(1, 11):
+        if u_int not in user_guesses:
+            user_guesses.append(u_int)
+            guesses += 1
+        else:
+            print(f"You have already guessed: {u_int}, try again...\n")
+            get_user_input()
         return u_int
     else:
-        print(f"That number is not in the range of numbers I am looking for,"
-              f"please try again.")
+        print(
+            f"That number is not in the range of numbers I am looking for,"
+            f"please try again."
+        )
         get_user_input()
 
 
@@ -49,35 +59,57 @@ def check_em(first_int, second_int):
     return higher or lower.
     """
     if first_int == second_int:
+        print(f"You got it on guess #: {guesses}! it was {first_int}")
+        user_guesses.clear()
         return True
-    elif first_int > second_int:
-        print(f"Too low")
-    else:
+    elif first_int <= second_int:
         print(f"Too high")
+    else:
+        print(f"Too low")
 
 
-def main():
-    guesses = 0
-    print(f"Initial setting of guesses is {guesses}")
+def computer():
+    print(f"This part of the game is not ready yet.")
+    pass
+
+
+def play_again():
     question = input(
-        f"Would you like to guess a number between "
-        f"1 and 10, y/n [y] "
+        f"Would you like to play a number guessing game, pick a number between"
+        f" 1 and 10? y/n [y] "
     )
     if question == "n":
         quit()
     else:
+        return True
+
+
+def main():
+    global guesses
+    if play_again():
+        guesses = 0
         c_int = random.randint(1, 10)
-    while guesses <= 10:
-        guesses += 1
-        print(f"Current setting of guesses is {guesses}")
-        u_int = get_user_input()
-        if check_em(c_int, u_int):
-            print(f"You got it, it took you {guesses} tries!\n")
-            main()
-        else:
+        while guesses < 10:
             u_int = get_user_input()
-            check_em(c_int, u_int)
+            if check_em(c_int, u_int):
+                play_again()
+            else:
+                u_int = get_user_input()
+                check_em(c_int, u_int)
+        play_again()
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="A number guessing game, between 1 and 10\n \
+        guess your number, if you want the computer to pick the number\n \
+        select the -c option."
+    )
+    parser.add_argument("-c", "--computer", help="Let the computer pick",
+                        action="store_true"
+                        )
+    args = vars(parser.parse_args())
+    if args["computer"]:
+        computer()
+    else:
         main()
