@@ -15,41 +15,39 @@ import argparse
 import random
 import string
 
-letters = string.ascii_letters
-
-
-letters = []
-numbers = []
-puncutation = []
+letters_list = []
+numbers_list = []
+punctuation_list = []
 
 
 def the_letters(number):
-    letters = random.choice(string.ascii_letters)
+    letters = string.ascii_letters
     for i in range(number):
-        letters.append(random.choice(letters))
-    return letters
+        letters_list.append(random.choice(letters))
 
 
 def the_numbers(number):
-    numbers = random.choise(string.digtits)
+    numbers = string.digits
     for i in range(number):
-        numbers.append(random.choice(numbers))
-    return numbers
+        numbers_list.append(random.choice(numbers))
 
 
 def the_punctuation(number):
-    punctuation = random.choise(string.punctuation)
+    punctuation = string.punctuation
     for i in range(number):
-        punctuation.append(random.choice(punctuation))
-    return punctuation
+        punctuation_list.append(random.choice(punctuation))
 
 
 def main():
     the_letters(args["number"])
     the_numbers(args["digits"])
     the_punctuation(args["punctuation"])
-    pw = ''.join(the_letters) + ''.join(the_numbers) + ''.join(the_punctuation)
-    print(f"Password is {pw}")
+    pw = (''.join(letters_list) +
+          ''.join(numbers_list) +
+          ''.join(punctuation_list))
+    random_pw = ''.join(random.sample(pw, len(pw)))
+
+    print(f"Password is {random_pw}")
 
 
 if __name__ == "__main__":
