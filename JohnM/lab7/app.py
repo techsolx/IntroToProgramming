@@ -92,11 +92,11 @@ def main():
         while guesses < 10:
             u_int = get_user_input()
             if check_em(c_int, u_int):
-                play_again()
+                main()
             else:
                 u_int = get_user_input()
                 check_em(c_int, u_int)
-        play_again()
+        main()
 
 
 if __name__ == "__main__":
